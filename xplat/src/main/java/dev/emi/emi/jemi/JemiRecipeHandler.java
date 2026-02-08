@@ -122,7 +122,7 @@ public class JemiRecipeHandler<T extends ScreenHandler, R> implements EmiRecipeH
 		try {
 			MinecraftClient client = MinecraftClient.getInstance();
 			R rawRecipe = getRawRecipe(recipe);
-			
+
 			if (view == null) {
 				view = createSlotsView(recipe, rawRecipe, List.of());
 			}
@@ -130,7 +130,7 @@ public class JemiRecipeHandler<T extends ScreenHandler, R> implements EmiRecipeH
 			if (view == null) {
 				return () -> IRecipeTransferError.Type.INTERNAL;
 			}
-			
+
 			return handler.transferRecipe(context.getScreenHandler(), rawRecipe != null ? rawRecipe : (R) recipe, view, client.player, context.getAmount() > 1, craft);
 		} catch (Exception e) {
 			EmiLog.error("Error executing JEI craft", e);
@@ -185,8 +185,16 @@ public class JemiRecipeHandler<T extends ScreenHandler, R> implements EmiRecipeH
 						addBlankIngredients(builder, slotWidgets, 3, RecipeIngredientRole.INPUT);
 						blankedSlots += 3;
 					}
-					addIngredients(builder, slotWidgets, recipe.getInputs().subList(0, Math.max(9, recipe.getInputs().size()) - blankedSlots), RecipeIngredientRole.INPUT);
-				}
+
+                    int inputSize = recipe.getInputs().size();
+                    // 计算 JEI/EMI 期望的结束索引
+                    int targetIndex = Math.max(9, inputSize) - blankedSlots;
+                    // 【关键修复】确保结束索引不超过列表实际长度
+                    int safeIndex = Math.min(inputSize, targetIndex);
+
+                    addIngredients(builder, slotWidgets, recipe.getInputs().subList(0, safeIndex), RecipeIngredientRole.INPUT);
+
+                }
 			} else {
 				addIngredients(builder, slotWidgets, recipe.getInputs(), RecipeIngredientRole.INPUT);
 			}
