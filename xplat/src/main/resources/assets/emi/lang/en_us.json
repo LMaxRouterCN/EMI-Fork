@@ -6,6 +6,8 @@
   "key.emi.toggle_visibility": "Toggle Visibility",
   "key.emi.focus_search": "Focus Search",
   "key.emi.clear_search": "Clear Search",
+  "key.emi.display_all_recipes": "Display All Recipes",
+
   "key.emi.view_recipes": "View Recipes",
   "key.emi.view_uses": "View Uses",
   "key.emi.favorite": "Favorite",
@@ -33,6 +35,9 @@
   "emi.index_source.creative": "Creative",
   "emi.index_source.registered": "Registered",
   "emi.index_source.creative_plus_registered": "Creative + Registered",
+  "emi.cheat_mode.true": "Always",
+  "emi.cheat_mode.false": "Never",
+  "emi.cheat_mode.creative": "Creative Only",
   "emi.help_level.verbose": "Verbose",
   "emi.help_level.normal": "Normal",
   "emi.help_level.none": "None",

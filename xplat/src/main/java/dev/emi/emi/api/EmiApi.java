@@ -48,7 +48,11 @@ public class EmiApi {
 	}
 
 	public static boolean isCheatMode() {
-		return EmiConfig.cheatMode;
+		return switch (EmiConfig.cheatMode) {
+			case TRUE -> true;
+			case CREATIVE -> client.player == null || client.player.isCreative();
+			case FALSE -> false;
+		};
 	}
 
 	/**
@@ -118,6 +122,17 @@ public class EmiApi {
 
 	public static void displayRecipeCategory(EmiRecipeCategory category) {
 		setPages(Map.of(category, getRecipeManager().getRecipes(category)), EmiStack.EMPTY);
+	}
+	
+	public static void displayRecipesForWorkstation(EmiIngredient workstation) {
+		EmiRecipeManager manager = getRecipeManager();
+		setPages(
+				manager.getCategories()
+						.stream()
+						.filter(c -> manager.getWorkstations(c).contains(workstation))
+						.collect(Collectors.toMap(c -> c, manager::getRecipes)),
+				workstation
+		);
 	}
 
 	public static void displayRecipe(EmiRecipe recipe) {

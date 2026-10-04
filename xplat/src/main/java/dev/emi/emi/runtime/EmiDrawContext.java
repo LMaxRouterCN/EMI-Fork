@@ -39,6 +39,10 @@ public class EmiDrawContext {
 		matrices().pop();
 	}
 
+	public void translate(float x, float y) {
+		matrices().translate(x, y, 0);
+	}
+
 	public void drawTexture(Identifier texture, int x, int y, int u, int v, int width, int height) {
 		drawTexture(texture, x, y, width, height, u, v, width, height, 256, 256);
 	}
@@ -99,6 +103,22 @@ public class EmiDrawContext {
 
 	public void drawCenteredTextWithShadow(Text text, int x, int y, int color) {
 		context.drawCenteredTextWithShadow(client.textRenderer, text.asOrderedText(), x, y, color);
+	}
+
+	public void enableDepthTest() {
+		RenderSystem.enableDepthTest();
+	}
+
+	public void disableDepthTest() {
+		RenderSystem.disableDepthTest();
+	}
+
+	public void enableBlend() {
+		RenderSystem.enableBlend();
+	}
+
+	public void disableBlend() {
+		RenderSystem.disableBlend();
 	}
 
 	public void resetColor() {

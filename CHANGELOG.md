@@ -1,9 +1,6 @@
-### Additions
-* List ingredients can now be serialized (and can be coerced into other ingredients)
-
 ### Tweaks
-* Recipe tree should be more conscious of catalyst ingredients, no longer requesting redundant tag ingredients
-* Empty/full search focus now does not trigger on random inputs
+* Adjusted mixin notification logging to properly avoid printing when empty.
 
 ### Fixes
-* Recipe fills no longer break when filling max stack size #915
+* Fix inconsistent crashes due to mixin order, typically on Fabric 1.19.2 or 1.20.1 #1171
+* Fixed double applications of self-mutation mixins
