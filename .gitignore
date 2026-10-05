@@ -21,3 +21,5 @@ bin/
 run/
 
 .architectury-transformer/
+#agent
+.agent_task_logs/
