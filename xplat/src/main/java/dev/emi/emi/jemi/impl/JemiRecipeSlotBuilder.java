@@ -13,6 +13,8 @@ import dev.emi.emi.jemi.impl.JemiRecipeSlot.OffsetDrawable;
 import dev.emi.emi.jemi.impl.JemiRecipeSlot.TankInfo;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.placement.HorizontalAlignment;
+import mezz.jei.api.gui.placement.VerticalAlignment;
 import mezz.jei.api.gui.ingredient.IRecipeSlotRichTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.ingredients.IIngredientRenderer;
@@ -161,5 +163,35 @@ public class JemiRecipeSlotBuilder implements IRecipeSlotBuilder {
 		this.defaultBackground = true;
 		this.large = true;
 		return this;
+	}
+
+	// [长期记忆: 005] 残余风险(源码级不可实现,实测 T1:15.20 类路径无 TilingDirection):
+	// JEI 15.62 新增重载 setFluidRenderer(long, boolean, int, int, TilingDirection) 的参数类型
+	// 是 15.62 新增类型,在 15.20 编译面下无法写出该签名,故本类不实现;
+	// 仅当 JEI 插件主动调用该 15.62 新 API 时才会 AbstractMethodError。
+	// 同根残余风险:IRecipeExtrasBuilder 的 6 个 addXXXWidget(返回 IDrawableWidget)、
+	// ITextWidget.setTooltip(IRecipeWidgetTooltipCallback) —— 详见 GOAL-PLAN.md。
+
+	// JEI 15.62 把 IPlaceable#setPosition(6 参,区域+对齐)从 default 改为 abstract,
+	// 经 IRecipeSlotBuilder extends IPlaceable 传导到本类,必须补真实现:
+	// 按槽位自身尺寸(getWidth/getHeight)在区域内对齐,算出绝对坐标后委托 setPosition(int, int)。
+	// @Override 合法(15.20 里该 default 已存在);返回 IRecipeSlotBuilder 覆盖 15.62 中
+	// IRecipeSlotBuilder 的协变重声明,编译器同时生成擦除为 IPlaceable 返回类型的桥方法,
+	// 经 IRecipeSlotBuilder 与经 raw IPlaceable 两条调用路径的描述符都被满足。
+	@Override
+	public IRecipeSlotBuilder setPosition(int areaX, int areaY, int areaWidth, int areaHeight, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment) {
+		int x = areaX;
+		if (horizontalAlignment == HorizontalAlignment.CENTER) {
+			x += (areaWidth - getWidth()) / 2;
+		} else if (horizontalAlignment == HorizontalAlignment.RIGHT) {
+			x += areaWidth - getWidth();
+		}
+		int y = areaY;
+		if (verticalAlignment == VerticalAlignment.CENTER) {
+			y += (areaHeight - getHeight()) / 2;
+		} else if (verticalAlignment == VerticalAlignment.BOTTOM) {
+			y += areaHeight - getHeight();
+		}
+		return setPosition(x, y);
 	}
 }
