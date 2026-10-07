@@ -1,0 +1,89 @@
+{
+  "next_id": 7,
+  "memory": {
+    "1": {
+      "temp": 20.390682574579035,
+      "initial_temp": 100,
+      "tags": [
+        "环境",
+        "gradle",
+        "构建",
+        "PokerAgent"
+      ],
+      "pin": false,
+      "created_at": 1791158814.8126786,
+      "last_accessed": 1791158814.812679
+    },
+    "2": {
+      "temp": 25.034408974245494,
+      "initial_temp": 100,
+      "tags": [
+        "项目",
+        "EMI",
+        "EMI-Fork",
+        "fork",
+        "LMax-1.20",
+        "版本习惯"
+      ],
+      "pin": false,
+      "created_at": 1791159001.3542676,
+      "last_accessed": 1791159001.354268
+    },
+    "3": {
+      "temp": 34.05616262881148,
+      "initial_temp": 100,
+      "tags": [
+        "PokerAgent",
+        "环境",
+        "exec",
+        "教训"
+      ],
+      "pin": false,
+      "created_at": 1791226575.166949,
+      "last_accessed": 1791226575.1669493
+    },
+    "4": {
+      "temp": 46.3291230159753,
+      "initial_temp": 100,
+      "tags": [
+        "EMI",
+        "EMI-Fork",
+        "LMax-1.20",
+        "工作流",
+        "JEI"
+      ],
+      "pin": false,
+      "created_at": 1791229920.3934925,
+      "last_accessed": 1791229920.393493
+    },
+    "5": {
+      "temp": 54.03600876626366,
+      "initial_temp": 100,
+      "tags": [
+        "EMI",
+        "EMI-Fork",
+        "gradle",
+        "构建",
+        "环境",
+        "JEI",
+        "JVM"
+      ],
+      "pin": false,
+      "created_at": 1791231267.3228004,
+      "last_accessed": 1791231267.3228006
+    },
+    "6": {
+      "temp": 100,
+      "initial_temp": 100,
+      "tags": [
+        "EMI",
+        "EMI-Fork",
+        "JEI",
+        "项目"
+      ],
+      "pin": false,
+      "created_at": 1791236071.4081702,
+      "last_accessed": 1791236071.4081702
+    }
+  }
+}

@@ -23,3 +23,4 @@ run/
 .architectury-transformer/
 #agent
 .agent_task_logs/
+.agent_temp_files/
